@@ -1,0 +1,8 @@
+<Solution>
+  <Configurations>
+    <Platform Name="ARM64" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="DxlibBasic.vcxproj" Id="4ea65af3-49a6-44ce-b0ad-b96f0d7388c8" />
+</Solution>
