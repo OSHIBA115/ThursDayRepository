@@ -2,36 +2,57 @@
 
 namespace Config
 {
-	//===============================
-	// Window settings
-	//===============================
-	//ウィンドウのサイズ
-	constexpr int WINDOW_WIDTH = 1920;
-	constexpr int WINDOW_HEIGHT = 1080;
-	//表示するX,Y座標
-	constexpr int PLAYER_DRAW_X = 96;
-	constexpr int PLAYER_DRAW_Y = 96;
+    //========================================
+    // ウィンドウ
+    //========================================
 
-	//===============================
-	// Player settings
-	//===============================
+    constexpr int WINDOW_WIDTH = 1440;
+    constexpr int WINDOW_HEIGHT = 900;
+    constexpr int COLOR_BIT = 16;
 
-	//1コマのサイズ
-	constexpr int PLAYER_WIDTH = 210;
-	constexpr int PLAYER_HEIGHT = 220;
-	//分割数
-	constexpr int PLAYER_COL = 7;
-	constexpr int PLAYER_ROW = 4;
 
-	//総フレーム数
-	constexpr int PLAYER_TOTAL_FRAMES = PLAYER_COL * PLAYER_ROW;
+    //========================================
+    // マップ
+    //========================================
 
-	//===============================
-	// アニメーション速度
-	//===============================
-	constexpr int IDLE_SPEED = 10;
-	constexpr int WALK_SPEED = 7;
-	constexpr int RUN_SPEED = 8;
-	constexpr int JUMP_SPEED = 6;
+    constexpr int MAP_CHIP_SIZE = 64;
 
+    constexpr int MAP_X_NUM = 16;
+    constexpr int MAP_Y_NUM = 12;
+
+    // マップ画像
+    constexpr int MAP_IMG_X_NUM = 2;
+    constexpr int MAP_IMG_Y_NUM = 1;
+
+    constexpr const char* MAP_IMAGE_PATH = "img/map.png";
+
+
+    //========================================
+    // プレイヤー
+    //========================================
+
+    constexpr float PLAYER_START_X = 100.0f;
+    constexpr float PLAYER_START_Y = 100.0f;
+
+    constexpr float PLAYER_MOVE_SPEED = 200.0f;
+
+    // プレイヤー画像サイズ
+    constexpr int PLAYER_IMAGE_SIZE_X = 64;
+    constexpr int PLAYER_IMAGE_SIZE_Y = 96;
+
+    // プレイヤー当たり判定サイズ
+    constexpr int PLAYER_HIT_SIZE_X = 40;
+    constexpr int PLAYER_HIT_SIZE_Y = 60;
+
+
+    //========================================
+    // アニメーション
+    //========================================
+
+    constexpr int ANIM_PATTERN_NUM = 3;
+    constexpr int ANIM_TYPE_NUM = 4;
+
+    constexpr float ANIMATION_FPS = 6.0f;
+
+    constexpr const char* PLAYER_IMAGE_PATH = "img/chara.png";
 }

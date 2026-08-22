@@ -1,117 +1,130 @@
 #include "Game.h"
-#include "Config.h"
-#include "Dxlib.h"
+#include "DxLib.h"
 
-void Game::Init()
+
+Game::Game()
 {
-	//===============================
-	// 分割画像の読み込み
-	//===============================
-	LoadDivGraph("img/AnimationPlayer1.png",
-		Config::PLAYER_TOTAL_FRAMES,
-		Config::PLAYER_COL,
-		Config::PLAYER_ROW,
-		Config::PLAYER_WIDTH,
-		Config::PLAYER_HEIGHT,
-		images);
-	//===============================
-	// アニメーションに分割画像を設定
-	//===============================
-	animations.SetImages(images);
-
-	currentAnim = AnimationType::Idle;
-	PlayerAnimation(currentAnim);
-	oldSpace = false;
+    nowCount = 0;
+    prevCount = 0;
 }
 
-void Game::Update()
+
+Game::~Game()
 {
-	//===============================
-	// フレームマネージャー更新
-	//===============================
-	frameManager.Update();
-
-	//===============================
-	// スペースキーの押下判定
-	//===============================
-	bool nowSpace = (CheckHitKey(KEY_INPUT_SPACE));
-
-	//==============================
-	// スペースキーが押された瞬間にアニメーションを切り替える
-	//==============================
-	if (nowSpace && !oldSpace)
-	{
-		switch (currentAnim)
-		{
-		case AnimationType::Idle:
-			currentAnim = AnimationType::Walk;
-			break;
-		case AnimationType::Walk:
-			currentAnim = AnimationType::Run;
-			break;
-		case AnimationType::Run:
-			currentAnim = AnimationType::Jump;
-			break;
-		case AnimationType::Jump:
-			currentAnim = AnimationType::Idle;
-			break;
-		default:
-			break;
-		}
-
-		//===============================
-		// アニメーション切替
-		//===============================
-		PlayerAnimation(currentAnim);
-	}
-	//===============================
-	// 前回のスペースキーの状態を更新
-	//===============================
-	oldSpace = nowSpace;
-
+    DxLib_End();
 }
+
+
+//========================================
+// 初期化
+//========================================
+
+bool Game::Init()
+{
+    ChangeWindowMode(TRUE);
+
+
+    SetGraphMode(Config::WINDOW_WIDTH, Config::WINDOW_HEIGHT, Config::COLOR_BIT);
+
+
+    if (DxLib_Init() == -1)
+    {
+        return false;
+    }
+
+
+    //========================================
+    // Player初期化
+    //========================================
+
+    if (!player.Init())
+    {
+        return false;
+    }
+
+
+    //========================================
+    // Map初期化
+    //========================================
+
+    if (!map.Init())
+    {
+        return false;
+    }
+
+
+    //========================================
+    // タイマー初期化
+    //========================================
+
+    nowCount = GetNowCount();
+    prevCount = nowCount;
+
+
+    return true;
+}
+
+
+//========================================
+// ゲームループ
+//========================================
+
+void Game::Run()
+{
+    while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
+    {
+        //====================================
+        // DeltaTime
+        //====================================
+
+        nowCount = GetNowCount();
+
+
+        float deltaTime = (nowCount - prevCount) / 1000.0f;
+
+
+        //====================================
+        // 更新
+        //====================================
+
+        Update(deltaTime);
+
+
+        //====================================
+        // 描画
+        //====================================
+
+        ClearDrawScreen();
+
+
+        Draw();
+
+
+        ScreenFlip();
+
+
+        prevCount = nowCount;
+    }
+}
+
+
+//========================================
+// 更新
+//========================================
+
+void Game::Update(float deltaTime)
+{
+    player.Update(deltaTime, map);
+}
+
+
+//========================================
+// 描画
+//========================================
 
 void Game::Draw()
 {
+    map.Draw();
 
-
-	DrawGraph(Config::PLAYER_DRAW_X,
-		Config::PLAYER_DRAW_Y,
-		animations.GetImage(frameManager.GetFrameCounter()),
-		TRUE);
-
-	DrawFormatString(
-		20,
-		20,
-		GetColor(255, 255, 255),
-		"Frame : %d",
-		frameManager.GetFrameCounter());
-}
-
-void Game::PlayerAnimation(AnimationType type)
-{
-	int row = static_cast<int>(type);
-
-	int startFrame = row * Config::PLAYER_COL;
-
-	int speed = Config::IDLE_SPEED;
-
-	switch (type)
-	{
-	case AnimationType::Idle:
-		speed = Config::IDLE_SPEED;
-		break;
-	case AnimationType::Walk:
-		speed = Config::WALK_SPEED;
-		break;
-	case AnimationType::Run:
-		speed = Config::RUN_SPEED;
-		break;
-	case AnimationType::Jump:
-		speed = Config::JUMP_SPEED;
-		break;
-	}
-
-	animations.Play(startFrame, Config::PLAYER_COL,
-		speed);
+    player.Draw();
 }
