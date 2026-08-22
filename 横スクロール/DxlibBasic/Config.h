@@ -7,9 +7,8 @@ namespace Config
     //========================================
 
     constexpr int WINDOW_WIDTH = 1440;
-    constexpr int WINDOW_HEIGHT = 900;
+    constexpr int WINDOW_HEIDHT = 900;
     constexpr int COLOR_BIT = 16;
-
 
     //========================================
     // マップ
@@ -55,4 +54,13 @@ namespace Config
     constexpr float ANIMATION_FPS = 6.0f;
 
     constexpr const char* PLAYER_IMAGE_PATH = "img/chara.png";
+
+    //=======================================
+    //カメラ
+    //=======================================
+
+    constexpr int SCREEN_WIDTH = 1280;
+    constexpr int SCREEN_HEIGHT = 720;
+
+    constexpr float CAMERA_SPEED = 5.0f;
 }
