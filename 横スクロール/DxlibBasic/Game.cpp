@@ -1,5 +1,7 @@
 #include "Game.h"
 #include "DxLib.h"
+#include "Config.h"
+#include "Map.h"
 
 
 Game::Game()
