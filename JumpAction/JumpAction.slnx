@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="JumpAction.vcxproj" />
+  <Project Path="JumpAction.vcxproj" Id="c72b8c43-3af3-4d7a-81f2-7824f6b659f4" />
 </Solution>
