@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="MapChip.vcxproj" />
+  <Project Path="MapChip.vcxproj" Id="faa19125-22b8-42b5-b163-255137875829" />
 </Solution>

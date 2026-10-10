@@ -16,7 +16,7 @@ class Map
 
 	//マップの縦横のマスの数
 	int mapWidth;
-	int mpHeight;
+	int mapHeight;
 
 	//マップの大きさ
 	static constexpr int CHIP_SIZE = 64;
