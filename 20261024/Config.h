@@ -20,7 +20,7 @@ namespace Config
 	constexpr int MAP_EMPTY = 0;
 
 	//マップファイル
-	constexpr char MAP_CHIP_IMAGE_PATH[] = "data/island/png";
+	constexpr char MAP_CHIP_IMAGE_PATH[] = "data/island.png";
 	constexpr char MAP_HIT_CSV_PATH[] = "data/island_hit.csv";
 	constexpr char MAP_BACK_CSV_PATH[] = "data/island_back.csv";
 	constexpr char MAP_BASE_CSV_PATH[] = "data/island_base.csv";
